@@ -84,3 +84,7 @@ def simulate_disk_io(seed):
     with open(filename, "wb") as f:
         f.write(os.urandom(1024 * 1024 * 10))
     os.remove(filename)
+
+
+if __name__ == "__main__":
+    uvicorn.run(app, host="0.0.0.0", port=50100, log_level="debug")
