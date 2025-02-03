@@ -24,7 +24,7 @@ class PingRequest(BaseModel):
 
 @app.get("/hello")
 def hello():
-    return {"status": "success", "message": f"Hello from {node_name}"}
+    return {"status": "success", "message": f"Hello from {node_name}\n"}
 
 
 @app.post("/apply_rule")
