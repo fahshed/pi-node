@@ -13,9 +13,12 @@ node_name = "node_pi"
 db_path = f"./db_{node_name}.json"
 node_db = TinyDB(db_path)
 
+
 class Rule(BaseModel):
     chain_id: int
     next_hop_id: Optional[str] = None
+    next_hop_base_url: Optional[str] = None
+
 
 class PingRequest(BaseModel):
     chain_id: int
@@ -40,6 +43,7 @@ def apply_rule(rule: Rule):
             {
                 "chain_id": rule.chain_id,
                 "next_node_id": rule.next_hop_id,
+                "next_hop_base_url": rule.next_hop_base_url,
                 "current_node_id": node_name,
             }
         )
@@ -58,6 +62,7 @@ def ping(req: PingRequest):
         raise HTTPException(status_code=404, detail="No chain rule found on this node.")
 
     next_node_id = chain_rule.get("next_node_id")
+    next_hop_base_url = chain_rule.get("next_hop_base_url")
 
     simulate_disk_io("ping")
 
@@ -67,7 +72,7 @@ def ping(req: PingRequest):
             status_code=500, detail="No next hop found and destination not reached."
         )
 
-    next_node_url = f"http://node_{next_node_id.lower()}:8000/ping"
+    next_node_url = f"{next_hop_base_url}/ping"
     try:
         response = requests.post(
             next_node_url,
