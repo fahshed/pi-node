@@ -8,7 +8,7 @@ from tinydb import TinyDB, Query
 
 app = FastAPI()
 
-node_name = "node_pi"
+node_name = "Pi"
 
 db_path = f"./db_{node_name}.json"
 node_db = TinyDB(db_path)
