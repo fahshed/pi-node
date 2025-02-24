@@ -37,7 +37,13 @@ def apply_rule(rule: Rule):
     q = Query()
     existing = node_db.get(q.chain_id == rule.chain_id)
     if existing:
-        node_db.update({"next_node_id": rule.next_hop_id}, q.chain_id == rule.chain_id)
+        node_db.update(
+            {
+                "next_node_id": rule.next_hop_id,
+                "next_hop_base_url": rule.next_hop_base_url,
+            },
+            q.chain_id == rule.chain_id,
+        )
     else:
         node_db.insert(
             {
