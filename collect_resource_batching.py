@@ -4,7 +4,7 @@ import time
 import os
 from datetime import datetime
 
-RUN_DURATION = 1800
+RUN_DURATION = 5000
 BATCH_SIZE = 1000
 CSV_FILENAME = "pi_metrics_batched.csv"
 
