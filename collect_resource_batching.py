@@ -113,7 +113,6 @@ def collect_resource_once():
     }
 
     flat_data = flatten_dict(combined_data)
-    print("Number of flattened metrics:", len(flat_data))
     return flat_data
 
 
